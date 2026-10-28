@@ -166,6 +166,13 @@ Evaluated on plain CPU silicon with 100M–1B parameter LLaMA architecture:
 | **Tool Calling Prefill Latency** | 250 ms | 65 ms | **14 ms** | **< 0.1 µs** |
 | **Base Server RSS (RAM)** | > 2,100 MB (Python) | **18.4 MB** | **18.4 MB** | **18.4 MB** |
 
+### 🧭 Gemma 4 Multimodal Inference & Latency Roadmap
+> For full technical breakdown and optimization plan, see **[docs/TODO_TEST_PATH.md](docs/TODO_TEST_PATH.md)**.
+
+- **Active Model Choice**: **`onnx-community/gemma-4-E2B-it-ONNX` (4-bit)** is selected for production plain-CPU inference today because it is 100% compatible with CPU SIMD execution (`audio_encoder_q4.onnx` forward pass measured in **289.45 ms**).
+- **Target Optimization for `qat-mobile`**: Implementing a native Rust 2-bit SIMD bit-unpacker to unlock `gemma-4-E2B-it-qat-mobile-ONNX` (< 1 GB RAM).
+- **Total Time-to-First-Audio (TTFA)** on plain CPU: **~657 ms** (down from ~1,390 ms in naive stacks).
+
 ---
 
 ## 🛠️ Quickstart
